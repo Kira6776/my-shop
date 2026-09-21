@@ -19,9 +19,17 @@
             background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%);
             display: flex;
             justify-content: center;
-            align-items: center;
             padding: 20px;
             color: #fff;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            width: 100%;
+            max-width: 380px;
         }
 
         #main {
@@ -30,7 +38,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
             padding: 40px 30px;
-            max-width: 380px;
             width: 100%;
             text-align: center;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
@@ -95,31 +102,105 @@
             transform: translateY(0);
             box-shadow: 0 5px 15px rgba(108, 139, 255, 0.3);
         }
+
+            #form {
+    display: none;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    gap: 14px;
+}
+
+        #form input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 15px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        #form input::placeholder {
+            color: #888ea0;
+        }
+
+        #form input:focus {
+            border-color: #6c8bff;
+            background: rgba(108, 139, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(108, 139, 255, 0.2);
+        }
+
+        #form input:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        #order {
+            width: 100%;
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(90deg, #6c8bff, #b06cff);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(108, 139, 255, 0.35);
+        }
+
+        #order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(176, 108, 255, 0.5);
+        }
+
+        #order:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 15px rgba(108, 139, 255, 0.3);
+        }
     </style>
 </head>
 <body>
-    <div id="main">
-        <h1>Онлайн магазин</h1>
-        <img src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png" alt="shop">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ipsum magni, molestias.</p>
-        <button id="buy">Купить</button>
+    <div class="wrapper">
+        <div id="main">
+            <h1>Онлайн магазин</h1>
+            <img src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png" alt="shop">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ipsum magni, molestias.</p>
+            <button id="buy">Купить</button>
+        </div>
+
+        <form id="form">
+            <input type="text" placeholder="Имя" id="user_name">
+            <input type="text" placeholder="Email" id="user_email">
+            <input type="text" placeholder="Телефон" id="user_phone">
+            <button id="order">Оформить</button>
+        </form>
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js?63"></script>
     <script>
-        const tg = window.Telegram?.WebApp;
-        if (tg) {
-            tg.ready();
-            tg.expand();
-        }
-
-        document.getElementById('buy').addEventListener('click', () => {
-            if (tg) {
-                tg.showAlert('Спасибо за покупку! 🎉');
-            } else {
-                alert('Спасибо за покупку! 🎉');
-            }
-        });
+      let tg = window.Telegram.WebApp;
+      let buy = document.getElementById("buy");
+      let order = document.getElementById("order");
+      
+      buy.addEventListener("click", () =>
+      {
+          document.getElementById("main").style.display = "none";
+          document.getElementById("form").style.display = "block";
+          document.getElementById("user_name").value=tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+      });
+      order.addEventListener("click", () => {
+         tg.close(); 
+      });
+      
     </script>
 </body>
 </html>
