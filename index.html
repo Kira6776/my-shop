@@ -6,13 +6,120 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        #main {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        #main h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #6c8bff, #b06cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #main img {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            margin: 10px auto 20px;
+            display: block;
+            filter: drop-shadow(0 10px 20px rgba(108, 139, 255, 0.4));
+            transition: transform 0.3s;
+        }
+
+        #main img:hover {
+            transform: scale(1.05);
+        }
+
+        #main p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #c5c8d6;
+            margin-bottom: 28px;
+        }
+
+        #buy {
+            width: 100%;
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(90deg, #6c8bff, #b06cff);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(108, 139, 255, 0.35);
+        }
+
+        #buy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(176, 108, 255, 0.5);
+        }
+
+        #buy:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 15px rgba(108, 139, 255, 0.3);
+        }
+    </style>
 </head>
 <body>
     <div id="main">
         <h1>Онлайн магазин</h1>
-        <img src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png">
+        <img src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png" alt="shop">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ipsum magni, molestias.</p>
         <button id="buy">Купить</button>
     </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js?63"></script>
+    <script>
+        const tg = window.Telegram?.WebApp;
+        if (tg) {
+            tg.ready();
+            tg.expand();
+        }
+
+        document.getElementById('buy').addEventListener('click', () => {
+            if (tg) {
+                tg.showAlert('Спасибо за покупку! 🎉');
+            } else {
+                alert('Спасибо за покупку! 🎉');
+            }
+        });
+    </script>
 </body>
 </html>
