@@ -113,7 +113,7 @@
     padding: 30px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     flex-direction: column;
-    gap: 14px;
+    gap: 20px;      /* ← было 14px, стало 20px */
 }
 
         #form input {
@@ -190,7 +190,7 @@
       let tg = window.Telegram.WebApp;
       let buy = document.getElementById("buy");
       let order = document.getElementById("order");
-      
+
       buy.addEventListener("click", () =>
       {
           document.getElementById("main").style.display = "none";
@@ -198,9 +198,9 @@
           document.getElementById("user_name").value=tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
       });
       order.addEventListener("click", () => {
-         tg.close(); 
+         tg.close();
       });
-      
+
     </script>
 </body>
 </html>
